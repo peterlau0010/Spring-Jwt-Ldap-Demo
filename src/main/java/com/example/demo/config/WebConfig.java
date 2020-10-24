@@ -3,6 +3,8 @@ package com.example.demo.config;
 import com.example.demo.security.JwtAuthenticationEntryPoint;
 import com.example.demo.security.JwtRequestFilter;
 import com.example.demo.security.OpenLdapAuthenticationProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //@Order(1)
 public class WebConfig extends WebSecurityConfigurerAdapter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebConfig.class);
+
     private OpenLdapAuthenticationProvider openLdapAuthenticationProvider;
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private JwtRequestFilter jwtRequestFilter;
@@ -35,14 +39,24 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(openLdapAuthenticationProvider);
 
+        //ldif file, need to remove first entry and disable application properties
         auth.ldapAuthentication().userDnPatterns("uid={0},ou=people").groupSearchBase("ou=groups")
-                .contextSource().url("ldap://localhost:8389/dc=springframework,dc=org").and()
-                .passwordCompare().passwordEncoder(new BCryptPasswordEncoder())
-                .passwordAttribute("userPassword");
+                .contextSource().ldif("classpath:test-server-2.ldif")
+                .root("dc=springframework,dc=org").and().passwordCompare()
+                .passwordEncoder(new BCryptPasswordEncoder()).passwordAttribute("userPassword")
+                .and();
+
+        //url
+//        auth.ldapAuthentication().userDnPatterns("uid={0},ou=people").groupSearchBase("ou=groups")
+//                .contextSource().
+//                url("ldap://localhost:8389/dc=springframework,dc=org").and().passwordCompare()
+//                .passwordEncoder(new BCryptPasswordEncoder()).passwordAttribute("userPassword");
+
 //        auth.inMemoryAuthentication().withUser("thomas").password("password").roles("USER").and()
 //                .withUser("joe").password("password").roles("USER");
+
+        LOGGER.info("Security configuration loaded.");
     }
 
     @Override
