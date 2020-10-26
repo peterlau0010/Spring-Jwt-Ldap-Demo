@@ -1,0 +1,36 @@
+jwt:
+  secret: mysecretistoosecuresonoecanguessit
+server:
+  port: 8443
+  servlet:
+    context-path: /demo
+  ssl:
+    enabled: true
+    key-alias: demo
+    key-store: classpath:keystore/demo.p12
+    key-store-password: password
+    key-store-type: PKCS12
+spring:
+  ldap:
+    embedded:
+      base-dn: dc=springframework,dc=org
+      ldif: classpath:test-server.ldif
+      port: 8389
+  profiles:
+    active: '@activatedProperties@'
+---
+spring:
+  profiles: local
+logging:
+  config: classpath:log4j2.xml
+environments:
+  env: local
+  example: value1
+---
+spring:
+  profiles: prod
+logging:
+  config: classpath:log4j2-prod.xml
+environments:
+  env: prod
+  example: value2

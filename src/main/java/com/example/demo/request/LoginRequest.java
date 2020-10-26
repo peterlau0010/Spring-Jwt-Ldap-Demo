@@ -3,7 +3,7 @@ package com.example.demo.request;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class LoginRequest {
+public class LoginRequest extends AbstractRequest{
 
     private String userName;
 
@@ -11,7 +11,7 @@ public class LoginRequest {
 
     @Override
     public String toString() {
-        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        final Gson gson = new GsonBuilder().create();
         return gson.toJson(this);
     }
 

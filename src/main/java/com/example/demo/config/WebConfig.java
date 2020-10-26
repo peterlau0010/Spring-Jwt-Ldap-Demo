@@ -2,17 +2,13 @@ package com.example.demo.config;
 
 import com.example.demo.security.JwtAuthenticationEntryPoint;
 import com.example.demo.security.JwtRequestFilter;
-import com.example.demo.security.OpenLdapAuthenticationProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,16 +19,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //@Order(1)
 public class WebConfig extends WebSecurityConfigurerAdapter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebConfig.class);
+    private static final Logger LOGGER = LogManager.getLogger(WebConfig.class);
 
-    private OpenLdapAuthenticationProvider openLdapAuthenticationProvider;
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private JwtRequestFilter jwtRequestFilter;
 
-    public WebConfig(OpenLdapAuthenticationProvider openLdapAuthenticationProvider,
-                     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+    public WebConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                      JwtRequestFilter jwtRequestFilter) {
-        this.openLdapAuthenticationProvider = openLdapAuthenticationProvider;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtRequestFilter = jwtRequestFilter;
 

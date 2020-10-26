@@ -2,7 +2,7 @@ package com.example.demo.response;
 
 import com.example.demo.model.Jwt;
 
-public class LoginResponse {
+public class LoginResponse extends AbstractResponse{
 
     Jwt jwt;
 
