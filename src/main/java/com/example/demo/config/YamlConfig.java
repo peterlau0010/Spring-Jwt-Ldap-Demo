@@ -16,6 +16,15 @@ public class YamlConfig {
     private String env;
 
     private String example;
+
+    private String tmpUploadPath;
+    private String deployFolderPath;
+    public String getDeployFolderPath() {
+        return deployFolderPath;
+    }
+    public void setDeployFolderPath(String deployFolderPath) {
+        this.deployFolderPath = deployFolderPath;
+    }
     public String getExample() {
         return example;
     }
@@ -29,10 +38,17 @@ public class YamlConfig {
         this.env = env;
     }
 
+    public String getTmpUploadPath() {
+        return tmpUploadPath;
+    }
+    public void setTmpUploadPath(String tmpUploadPath) {
+        this.tmpUploadPath = tmpUploadPath;
+    }
     @Override
     public String toString() {
         return new StringJoiner(", ", YamlConfig.class.getSimpleName() + "[", "]")
-                .add("env='" + env + "'").add("example='" + example + "'").toString();
+                .add("env='" + env + "'").add("example='" + example + "'")
+                .add("tmpUploadPath='" + tmpUploadPath + "'").toString();
     }
 
 }

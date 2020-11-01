@@ -26,11 +26,19 @@ logging:
 environments:
   env: local
   example: value1
+  tmpUploadPath: /Users/peterlau/Documents/tmp/
+  deployFolderPath: /Users/peterlau/Documents/deploy/
 ---
 spring:
   profiles: prod
+  servlet:
+    multipart:
+      max-request-size: 140MB
+      max-file-size: 140MB
 logging:
   config: classpath:log4j2-prod.xml
 environments:
   env: prod
   example: value2
+  tmpUploadPath: /Users/peterlau/Documents/tmp/
+  deployFolderPath: /Users/peterlau/Documents/deploy/
