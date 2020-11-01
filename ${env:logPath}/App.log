@@ -1,7 +1,0 @@
-2020-10-26 09:42:54 INFO  Starting DemoApplication on MacBook-Pro with PID 5200 (/Users/peterlau/Documents/workspace/spring-jwt-ldap-demo/target/classes started by peterlau in /Users/peterlau/Documents/workspace/spring-jwt-ldap-demo)
-2020-10-26 09:42:54 DEBUG Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
-2020-10-26 09:42:54 INFO  The following profiles are active: prod
-2020-10-26 09:42:55 DEBUG Filter 'jwtRequestFilter' configured for use
-2020-10-26 09:42:55 INFO  Security configuration loaded.
-2020-10-26 09:42:56 INFO  Started DemoApplication in 1.929 seconds (JVM running for 2.78)
-2020-10-26 09:42:56 INFO  LogPath= /Users/peterlau/Documents/log_prod
